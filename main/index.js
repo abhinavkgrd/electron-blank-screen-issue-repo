@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
-const path = require("node:path");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const { join } = require("path");
 
 function createWindow() {
   // Create the browser window.
@@ -8,8 +8,9 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      sandbox: false,
       contextIsolation: false,
+      preload: join(__dirname, "preload.js"),
     },
   });
 
@@ -42,3 +43,8 @@ app.on("window-all-closed", function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+// listen the channel `message` and resend the received message to the renderer process
+ipcMain.on("message", (event, message) => {
+  event.sender.send("message", message);
+});
