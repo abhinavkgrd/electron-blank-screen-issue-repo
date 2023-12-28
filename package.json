@@ -4,8 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main/index.js",
   "scripts": {
-    "dev": "concurrently -k \"next dev\" \"electron .\"",
-    "start": "electron ."
+    "start": "concurrently -k \"next dev\" \"electron .\""
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
