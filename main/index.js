@@ -9,7 +9,6 @@ function createWindow() {
     height: 600,
     webPreferences: {
       sandbox: false,
-      contextIsolation: false,
       preload: join(__dirname, "preload.js"),
     },
   });
